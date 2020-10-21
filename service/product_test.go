@@ -30,21 +30,24 @@ func (suite *ProductServiceTestSuite) SetupTest() {
 
 func (suite *ProductServiceTestSuite) TestGetAllProductsShouldReturnAllProductsSuccessfully() {
 
-	productsFromDb := []model.Product{
-		{
-			ID:       123,
-			Name:     "Saw",
-			Price:    10.00,
-			Quantity: 5,
-			State:    "available",
-		},
-		{
-			ID:       456,
-			Name:     "Screwdriver",
-			Price:    5.90,
-			Quantity: 2,
-			State:    "available",
-		},
+	product1 := &model.Product{
+		ID:       123,
+		Name:     "Saw",
+		Price:    10.00,
+		Quantity: 5,
+		State:    "available",
+	}
+
+	product2 := &model.Product{
+		ID:       456,
+		Name:     "Screwdriver",
+		Price:    5.90,
+		Quantity: 2,
+		State:    "available",
+	}
+
+	productsFromDb := []*model.Product{
+		product1, product2,
 	}
 
 	expectedProducts := contract.GetProducts{

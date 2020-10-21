@@ -36,12 +36,15 @@ func (suite *ProductRepositoryTestSuite) TearDownTest() {
 	_ = appcontext.GetDB().Close()
 }
 
-func (suite *ProductRepositoryTestSuite) insertTestDataProduct(product *model.Product) (*model.Product, error) {
+func (suite *ProductRepositoryTestSuite) insertTestDataProduct(productData []*model.Product) ([]*model.Product, error) {
 	transaction := suite.db.Begin()
-	err := transaction.Debug().Model(&model.Product{}).Create(&product).Error
-	if err != nil {
-		transaction.Rollback()
-		return nil, err
+	var product []*model.Product
+	for _,product := range productData {
+		err := transaction.Debug().Model(&model.Product{}).Create(&product).Error
+		if err != nil {
+			transaction.Rollback()
+			return nil, err
+		}
 	}
 	return product, transaction.Commit().Error
 }
@@ -49,7 +52,7 @@ func (suite *ProductRepositoryTestSuite) insertTestDataProduct(product *model.Pr
 func (suite *ProductRepositoryTestSuite) TestGetAllProductsShouldReturnProductsSuccessfully() {
 	createdAt, _ := time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 	updatedAt, _ := time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-	product := model.Product{
+	product1 := &model.Product{
 		ID:        123,
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
@@ -58,10 +61,30 @@ func (suite *ProductRepositoryTestSuite) TestGetAllProductsShouldReturnProductsS
 		Quantity:  5,
 		State:     "available",
 	}
-	_, err := suite.insertTestDataProduct(&product)
+	product2 := &model.Product{
+		ID:        456,
+		CreatedAt: createdAt,
+		UpdatedAt: updatedAt,
+		Name:      "Hammer",
+		Price:     11.50,
+		Quantity:  3,
+		State:     "available",
+	}
+	products := []*model.Product{
+		product1,product2,
+	}
+	_, err := suite.insertTestDataProduct(products)
 	actualProducts, err := suite.repository.GetAllProducts(suite.ctx)
 
-	suite.Equal(product, *actualProducts[0])
+	suite.Equal(products, actualProducts)
+	suite.Equal(2, len(actualProducts))
+	suite.NoError(err)
+}
+
+func (suite *ProductRepositoryTestSuite) TestGetAllProductsShouldReturnEmptyProductsSuccessfully() {
+	actualProducts, err := suite.repository.GetAllProducts(suite.ctx)
+	suite.Equal([]*model.Product{}, actualProducts)
+	suite.Equal(0, len(actualProducts))
 	suite.NoError(err)
 }
 

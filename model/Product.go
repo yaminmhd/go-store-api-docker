@@ -13,12 +13,3 @@ type Product struct {
 	Quantity  uint16    `gorm:"default:0;unsigned"`
 	State     string    `gorm:"not null"`
 }
-
-//func (p *Product) AfterCreate(tx *gorm.DB) (err error) {
-//	createdAt, _ := time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-//	updatedAt, _ := time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-//	p.CreatedAt = createdAt
-//	p.UpdatedAt = updatedAt
-//	return
-//}
-

@@ -18,9 +18,9 @@ func(repo Product) GetAllProducts(ctx context.Context) ([]*model.Product, error)
 	var products []*model.Product
 
 	err := repo.db.Debug().Model(&model.Product{}).Find(&products).Error
-	if err != nil {
+	if err != nil{
 		log.Log.Error("[ProductRepository] error getting products from DB", err)
-		return nil, errors.New(constant.ErrorNotFound)
+		return nil, errors.New(constant.ErrorInternalServerError)
 	}
 	return products, err
 }
