@@ -1,0 +1,11 @@
+# Binaries
+out/
+
+# Coverage files
+*.out
+
+# Config files
+application.yml
+
+#ide
+.idea/*
