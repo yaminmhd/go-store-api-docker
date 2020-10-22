@@ -2,14 +2,15 @@ package server
 
 import (
 	"context"
-	"github.com/urfave/negroni"
-	"github.com/yaminmhd/go-hardware-store/config"
-	"github.com/yaminmhd/go-hardware-store/log"
 	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
 	"syscall"
+
+	"github.com/urfave/negroni"
+	"github.com/yaminmhd/go-hardware-store/config"
+	"github.com/yaminmhd/go-hardware-store/log"
 )
 
 func listenServer(apiServer *http.Server) {

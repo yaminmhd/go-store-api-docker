@@ -1,11 +1,12 @@
 package server
 
 import (
+	"net/http"
+
 	"github.com/yaminmhd/go-hardware-store/appcontext"
 	"github.com/yaminmhd/go-hardware-store/handler"
 	"github.com/yaminmhd/go-hardware-store/repository"
 	"github.com/yaminmhd/go-hardware-store/service"
-	"net/http"
 
 	"github.com/gorilla/mux"
 )
@@ -53,8 +54,8 @@ func Init() Dependency {
 	services := initServices(repositories)
 	handlers := initHandlers(services)
 	return Dependency{
-		Handlers: handlers,
-		Services: services,
+		Handlers:     handlers,
+		Services:     services,
 		Repositories: repositories,
 	}
 }

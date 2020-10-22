@@ -1,10 +1,11 @@
 package log
 
 import (
-	"github.com/sirupsen/logrus"
-	"github.com/yaminmhd/go-hardware-store/config"
 	"net/http"
 	"os"
+
+	"github.com/sirupsen/logrus"
+	"github.com/yaminmhd/go-hardware-store/config"
 )
 
 type Logger struct {

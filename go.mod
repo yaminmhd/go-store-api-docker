@@ -10,4 +10,5 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/urfave/cli v1.22.4
 	github.com/urfave/negroni v1.0.0
+	golang.org/x/tools v0.0.0-20201021214918-23787c007979 // indirect
 )

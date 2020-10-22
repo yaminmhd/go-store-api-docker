@@ -1,11 +1,12 @@
 package contract
 
 import (
-	"github.com/yaminmhd/go-hardware-store/constant"
 	"net/http"
+
+	"github.com/yaminmhd/go-hardware-store/constant"
 )
 
-type successDetails struct{
+type successDetails struct {
 	status int
 }
 

@@ -5,15 +5,15 @@ import (
 )
 
 type config struct {
-	env                string
-	port               int
-	logLevel           string
-	dbConfig           DatabaseConfig
+	env      string
+	port     int
+	logLevel string
+	dbConfig DatabaseConfig
 }
 
 var appConfig config
 
-func Load(){
+func Load() {
 	viper.AutomaticEnv()
 	viper.SetConfigName("")
 	viper.AddConfigPath("./")
@@ -23,10 +23,10 @@ func Load(){
 	viper.ReadInConfig()
 
 	appConfig = config{
-		env:                getString("ENVIRONMENT", true),
-		port:               getInt("APP_PORT", true),
-		logLevel:           getString("LOG_LEVEL", true),
-		dbConfig:           getDatabaseConfig(),
+		env:      getString("ENVIRONMENT", true),
+		port:     getInt("APP_PORT", true),
+		logLevel: getString("LOG_LEVEL", true),
+		dbConfig: getDatabaseConfig(),
 	}
 }
 

@@ -2,15 +2,16 @@ package handler
 
 import (
 	"context"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/suite"
 	"github.com/yaminmhd/go-hardware-store/config"
 	"github.com/yaminmhd/go-hardware-store/contract"
 	"github.com/yaminmhd/go-hardware-store/log"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
-	"testing"
 )
 
 type ProductHandlerProductSuite struct {
@@ -20,7 +21,7 @@ type ProductHandlerProductSuite struct {
 	mockService *ProductServiceMock
 }
 
-func (suite *ProductHandlerProductSuite) SetupSuite(){
+func (suite *ProductHandlerProductSuite) SetupSuite() {
 	config.Load()
 	log.SetupLogger()
 }

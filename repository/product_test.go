@@ -2,14 +2,15 @@ package repository
 
 import (
 	"context"
+	"testing"
+	"time"
+
 	"github.com/jinzhu/gorm"
 	"github.com/stretchr/testify/suite"
 	"github.com/yaminmhd/go-hardware-store/appcontext"
 	"github.com/yaminmhd/go-hardware-store/config"
 	"github.com/yaminmhd/go-hardware-store/log"
 	"github.com/yaminmhd/go-hardware-store/model"
-	"testing"
-	"time"
 )
 
 type ProductRepositoryTestSuite struct {
@@ -39,7 +40,7 @@ func (suite *ProductRepositoryTestSuite) TearDownTest() {
 func (suite *ProductRepositoryTestSuite) insertTestDataProduct(productData []*model.Product) ([]*model.Product, error) {
 	transaction := suite.db.Begin()
 	var product []*model.Product
-	for _,product := range productData {
+	for _, product := range productData {
 		err := transaction.Debug().Model(&model.Product{}).Create(&product).Error
 		if err != nil {
 			transaction.Rollback()
@@ -71,7 +72,7 @@ func (suite *ProductRepositoryTestSuite) TestGetAllProductsShouldReturnProductsS
 		State:     "available",
 	}
 	products := []*model.Product{
-		product1,product2,
+		product1, product2,
 	}
 	_, err := suite.insertTestDataProduct(products)
 	actualProducts, err := suite.repository.GetAllProducts(suite.ctx)

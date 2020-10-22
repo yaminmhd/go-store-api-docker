@@ -2,12 +2,13 @@ package service
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/suite"
 	"github.com/yaminmhd/go-hardware-store/config"
 	"github.com/yaminmhd/go-hardware-store/contract"
 	"github.com/yaminmhd/go-hardware-store/log"
 	"github.com/yaminmhd/go-hardware-store/model"
-	"testing"
 )
 
 type ProductServiceTestSuite struct {

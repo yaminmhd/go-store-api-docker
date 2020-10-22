@@ -1,10 +1,11 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/yaminmhd/go-hardware-store/constant"
 	"github.com/yaminmhd/go-hardware-store/contract"
 	"github.com/yaminmhd/go-hardware-store/log"
-	"net/http"
 )
 
 type Product struct {

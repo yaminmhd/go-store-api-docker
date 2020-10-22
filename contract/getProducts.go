@@ -4,7 +4,7 @@ import "time"
 
 type GetProducts struct {
 	Products   []ProductSummary `json:"products"`
-	TotalCount int            `json:"total_count"`
+	TotalCount int              `json:"total_count"`
 }
 
 type ProductSummary struct {

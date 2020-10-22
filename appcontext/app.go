@@ -1,12 +1,12 @@
 package appcontext
 
 import (
+	"log"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/yaminmhd/go-hardware-store/config"
-	"log"
 	"github.com/yaminmhd/go-hardware-store/model"
-
 )
 
 type applicationContext struct {
@@ -15,7 +15,7 @@ type applicationContext struct {
 
 var applicationcontext *applicationContext
 
-func initDB() *gorm.DB{
+func initDB() *gorm.DB {
 	db, err := gorm.Open("mysql", config.Database().ConnectionURL())
 	if err != nil {
 		log.Fatal(err)
@@ -34,15 +34,19 @@ func GetDB() *gorm.DB {
 	return applicationcontext.db
 }
 
-func CreateTables(){
+func CreateTables() {
 	db := GetDB()
 	transaction := db.Begin()
-	err := transaction.Debug().CreateTable(&model.Product{}).Error
+	err := transaction.Debug().DropTableIfExists(&model.Product{}).Error
 	if err != nil {
 		transaction.Rollback()
 		log.Fatal(err)
 	}
-
+	err = transaction.Debug().CreateTable(&model.Product{}).Error
+	if err != nil {
+		transaction.Rollback()
+		log.Fatal(err)
+	}
 	err = transaction.Commit().Error
 	if err != nil {
 		transaction.Rollback()

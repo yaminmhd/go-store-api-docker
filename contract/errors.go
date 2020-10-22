@@ -1,8 +1,9 @@
 package contract
 
 import (
-	"github.com/yaminmhd/go-hardware-store/constant"
 	"net/http"
+
+	"github.com/yaminmhd/go-hardware-store/constant"
 )
 
 type errorDetails struct {
